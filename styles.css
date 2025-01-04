@@ -1,0 +1,89 @@
+:root {
+    --primary: #1a1a1a;
+    --accent: #FF6B6B;
+}
+
+body {
+    background-color: #ffffff;
+    color: var(--primary);
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.scroll-section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    padding: 80px 0;
+}
+
+.project-card {
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.typewriter::after {
+    content: '|';
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.skill-badge {
+    transition: all 0.3s ease;
+}
+
+.skill-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-content {
+    animation: fadeIn 1s;
+}
+
+.mobile-menu {
+    display: none;
+    transform: translateY(-100%);
+    transition: 0.3s;
+}
+
+.mobile-menu.active {
+    display: block;
+    transform: translateY(0);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
