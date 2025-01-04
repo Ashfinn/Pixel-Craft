@@ -1,4 +1,4 @@
-# ashfinn.github.io
+# Modern Portfolio Template
 
 A modern, responsive portfolio website built with HTML, TailwindCSS, and vanilla JavaScript, featuring interactive particle animations and smooth scroll effects.
 
