@@ -1,4 +1,4 @@
-# PixelCraft Digital - Modern Portfolio
+# PixelCraft Digital
 
 A visually stunning, animated, and fully responsive portfolio website template for digital marketing agencies, creative studios, or freelancers. Built with [Tailwind CSS](https://tailwindcss.com/) via CDN, it features modern UI/UX, smooth animations, and a professional layout—all in a single HTML file.
 
