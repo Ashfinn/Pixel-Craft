@@ -1,412 +1,612 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Portfolio</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>PixelCraft Digital - Marketing Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#1e293b',
+                        accent: '#3b82f6',
+                        'accent-light': '#60a5fa',
+                        'accent-dark': '#2563eb',
+                        success: '#10b981',
+                        warning: '#f59e0b'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'typewriter': 'typewriter 3s steps(40) 1s forwards, blink 1s infinite 4s',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'spin-slow': 'spin 3s linear infinite',
+                        'gradient': 'gradient 6s ease infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            'from': { opacity: '0', transform: 'translateY(20px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInUp: {
+                            'from': { opacity: '0', transform: 'translateY(30px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideInLeft: {
+                            'from': { opacity: '0', transform: 'translateX(-30px)' },
+                            'to': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideInRight: {
+                            'from': { opacity: '0', transform: 'translateX(30px)' },
+                            'to': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' },
+                            '50%': { boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        typewriter: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' }
+                        },
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' }
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
+<body class="overflow-x-hidden bg-gray-900 text-white font-sans">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 z-0">
+        <div
+            class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20 animate-gradient bg-[length:400%_400%]">
+        </div>
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float"
+            style="animation-delay: 2s;"></div>
+    </div>
 
-<body class="overflow-x-hidden">
-    <canvas id="canvas"></canvas>
-    <nav class="fixed w-full z-50 glass">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-gray-900/80 backdrop-blur-lg border-b border-white/10 transition-all duration-300">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#home" class="text-xl font-mono">OR</a>
-            <button id="menu-toggle" class="md:hidden">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="#home"
+                class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300">
+                PixelCraft
+            </a>
+
+            <!-- Mobile menu button -->
+            <button id="menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-300">
+                <svg class="w-6 h-6 transition-transform duration-300" id="menu-icon" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4 6h16M4 12h16m-16 6h16" />
                 </svg>
             </button>
+
+            <!-- Desktop navigation -->
             <div class="hidden md:flex space-x-8">
-                <a href="#about" class="hover:text-[#FF6B6B] transition-colors">/about</a>
-                <a href="#work" class="hover:text-[#FF6B6B] transition-colors">/work</a>
-                <a href="#contact" class="hover:text-[#FF6B6B] transition-colors">/contact</a>
-                <a href="resume.pdf" class="hover:text-[#FF6B6B] transition-colors">/resume</a>
+                <a href="#services" class="relative hover:text-accent transition-colors duration-300 group">
+                    Services
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#work" class="relative hover:text-accent transition-colors duration-300 group">
+                    Portfolio
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#team" class="relative hover:text-accent transition-colors duration-300 group">
+                    Team
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contact"
+                    class="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full hover:from-blue-600 hover:to-purple-600 transform hover:scale-105 transition-all duration-300">
+                    Get Quote
+                </a>
             </div>
         </div>
-        <div id="mobile-menu" class="mobile-menu bg-white w-full absolute top-full left-0 py-4 shadow-lg">
-            <div class="container mx-auto px-4 flex flex-col space-y-4">
-                <a href="#about" class="hover:text-[#FF6B6B] transition-colors">/about</a>
-                <a href="#work" class="hover:text-[#FF6B6B] transition-colors">/work</a>
-                <a href="#contact" class="hover:text-[#FF6B6B] transition-colors">/contact</a>
-                <a href="resume.pdf" class="hover:text-[#FF6B6B] transition-colors">/resume</a>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu"
+            class="md:hidden absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-lg border-b border-white/10 transform -translate-y-full opacity-0 transition-all duration-300">
+            <div class="container mx-auto px-4 py-6 flex flex-col space-y-4">
+                <a href="#services" class="text-lg hover:text-accent transition-colors duration-300">Services</a>
+                <a href="#work" class="text-lg hover:text-accent transition-colors duration-300">Portfolio</a>
+                <a href="#team" class="text-lg hover:text-accent transition-colors duration-300">Team</a>
+                <a href="#contact"
+                    class="text-lg px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 self-start">Get
+                    Quote</a>
             </div>
         </div>
     </nav>
 
-    <section id="home" class="scroll-section flex items-center justify-center relative">
-        <div class="container mx-auto px-4 text-center relative z-10 hero-content">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 typewriter" id="typewriter"></h1>
-            <p class="text-gray-600 mb-8 max-w-2xl mx-auto text-lg">
-                Software Developer & Machine Learning Engineer
-            </p>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="scroll-section bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6">About Me</h2>
-                    <p class="text-gray-600 mb-8">
-                        I'm a Mathematics student who fell in love with coding along the way. When I'm not diving
-                        into calculus at University of Chittagong, you'll find me building stuff with Python and
-                        Next.js, or geeking out over machine learning algorithms.
-                    </p>
-                    <p class="text-gray-600 mb-8">
-                        My journey in tech started with a deep curiosity for AI and has evolved into a career where I
-                        combine technical expertise with creative problem-solving. I specialize in developing machine
-                        learning models and creating intuitive user interfaces.
-                    </p>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">Python</span>
-                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">Machine
-                            Learning</span>
-                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">Next.js</span>
-                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">React</span>
-                    </div>
-                </div>
-                <div class="relative">
-                    <img src="img/me2.jpg" alt="Profile" class="rounded-lg shadow-lg">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Work -->
-    <section id="work" class="scroll-section">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">Featured Work</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Diarrhea Prediction Model</h3>
-                    <p class="text-gray-600 mb-4">Machine learning model analyzing environmental factors using Random
-                        Forest and SVR</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">scikit-learn</span>
-                    </div>
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">IMDB Sentiment Analysis</h3>
-                    <p class="text-gray-600 mb-4">NLP-based sentiment analyzer with interactive Streamlit interface</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">NLTK</span>
-                    </div>
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">httPY</h3>
-                    <p class="text-gray-600 mb-4">A simple HTTP server implemented in Python that handles basic HTTP
-                        requests and responds according to specified endpoints.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
-                    </div>
-                </div>
-
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">HelpBot</h3>
-                    <p class="text-gray-600 mb-4">HelpBot is a cutting-edge AI customer support chatbot built using
-                        Next.js and Material-UI (MUI), providing a user-friendly and engaging experience for customers
-                        seeking assistance.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Next.js</span>
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">MUI</span>
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">JavaScript</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="scroll-section bg-white">
-        <div class="container mx-auto px-4 py-20">
-            <h2 class="text-3xl font-bold mb-12 text-center">Technical Skills</h2>
-
-            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Languages -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Languages</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Python</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">JavaScript</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">TypeScript</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">SQL</span>
-                    </div>
-                </div>
-
-                <!-- Frameworks -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Frameworks</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">React</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Next.js</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">TensorFlow</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">PyTorch</span>
-                    </div>
-                </div>
-
-                <!-- Tools -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Tools & Tech</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Git</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Docker</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">AWS</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Linux</span>
-                    </div>
-                </div>
-
-                <!-- Machine Learning -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Machine Learning</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Deep
-                            Learning</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">NLP</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Computer
-                            Vision</span>
-                    </div>
-                </div>
-
-                <!-- Web Development -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Web Development</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">HTML/CSS</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">TailwindCSS</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Node.js</span>
-                    </div>
-                </div>
-
-                <!-- Databases -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Databases</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">PostgreSQL</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">MongoDB</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Redis</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications -->
-    <section id="cert" class="scroll-section">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">My Certifications</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Programming in C++: A Hands-on Introduction</h3>
-                    <p class="text-gray-600 mb-4">Codio (2024)</p>
-
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Python for Data Science, AI & Development</h3>
-                    <p class="text-gray-600 mb-4">IBM (2024)</p>
-
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Web Application Technologies and Django</h3>
-                    <p class="text-gray-600 mb-4">University of Michigan (2024)</p>
-
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Introduction to Programming with MATLAB</h3>
-                    <p class="text-gray-600 mb-4">anderbilt University (2024)</p>
-
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Developing AI Applications with Python and Flask</h3>
-                    <p class="text-gray-600 mb-4">IBM (2024)</p>
-
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Introduction to Cloud Computing</h3>
-                    <p class="text-gray-600 mb-4">IBM (2024)</p>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="contact" class="scroll-section bg-gray-50 flex items-center justify-center min-h-screen">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-8">Let's Connect</h2>
-            <div class="max-w-xl mx-auto bg-white p-10 rounded-xl shadow-xl">
-                <p class="text-gray-700 text-lg mb-8">Open to new opportunities and collaborations</p>
-                <div class="flex flex-col items-center gap-6">
-                    <a href="mailto:obidur.shawal@gmail.com"
-                        class="group inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-lg hover:bg-[#ff5252] transition-all transform hover:-translate-y-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        <span class="font-medium">obidur.shawal@gmail.com</span>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="animate-fade-in">
+                <h1
+                    class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Digital Growth
+                </h1>
+                <h2 class="text-2xl md:text-4xl font-light mb-8 text-gray-300 animate-fade-in-up"
+                    style="animation-delay: 0.3s;">
+                    That Actually Works
+                </h2>
+                <p class="text-gray-400 mb-10 max-w-2xl mx-auto text-lg md:text-xl animate-fade-in-up"
+                    style="animation-delay: 0.6s;">
+                    We help brands dominate the digital landscape through strategic marketing, stunning design, and
+                    data-driven results.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
+                    style="animation-delay: 0.9s;">
+                    <a href="#services"
+                        class="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full hover:from-blue-600 hover:to-purple-600 transform hover:scale-105 hover:shadow-2xl transition-all duration-300">
+                        Explore Services
                     </a>
-                    <div class="flex gap-6 mt-4">
-                        <a href="https://github.com/yourusername"
-                            class="text-gray-600 hover:text-[#FF6B6B] transition-colors">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                            </svg>
-                        </a>
-                        <a href="https://linkedin.com/in/yourusername"
-                            class="text-gray-600 hover:text-[#FF6B6B] transition-colors">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                            </svg>
-                        </a>
-                        <a href="https://twitter.com/yourusername"
-                            class="text-gray-600 hover:text-[#FF6B6B] transition-colors">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                            </svg>
-                        </a>
+                    <a href="#work"
+                        class="px-8 py-4 border-2 border-blue-500 text-blue-400 rounded-full hover:bg-blue-500/10 hover:text-blue-300 transform hover:scale-105 transition-all duration-300">
+                        View Our Work
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
+            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="min-h-screen py-20 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2
+                    class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Our Services
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    We offer comprehensive digital marketing solutions tailored to your business needs
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <div
+                    class="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-blue-500/50 transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/20">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-blue-400 transition-colors duration-300">Digital
+                        Strategy</h3>
+                    <p class="text-gray-400 leading-relaxed">Comprehensive digital marketing strategies that align with
+                        your business goals and drive measurable results.</p>
+                </div>
+
+                <div
+                    class="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 4v10a2 2 0 002 2h6a2 2 0 002-2V8M7 8h10">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-purple-400 transition-colors duration-300">Brand
+                        Design</h3>
+                    <p class="text-gray-400 leading-relaxed">Creative brand identity and visual design that captures
+                        your essence and resonates with your audience.</p>
+                </div>
+
+                <div
+                    class="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-green-500/50 transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/20">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-green-400 transition-colors duration-300">
+                        Analytics & SEO</h3>
+                    <p class="text-gray-400 leading-relaxed">Data-driven SEO optimization and analytics to improve your
+                        search rankings and track performance.</p>
+                </div>
+
+                <div
+                    class="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-yellow-500/50 transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/20">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-yellow-400 transition-colors duration-300">
+                        Content Creation</h3>
+                    <p class="text-gray-400 leading-relaxed">Engaging video content, social media posts, and marketing
+                        materials that tell your brand story.</p>
+                </div>
+
+                <div
+                    class="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-red-500/50 transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-red-500/20">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-red-400 transition-colors duration-300">Social
+                        Media</h3>
+                    <p class="text-gray-400 leading-relaxed">Strategic social media management and advertising campaigns
+                        across all major platforms.</p>
+                </div>
+
+                <div
+                    class="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-cyan-500/50 transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-cyan-400 transition-colors duration-300">Web
+                        Development</h3>
+                    <p class="text-gray-400 leading-relaxed">Modern, responsive websites and web applications built with
+                        the latest technologies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="work" class="min-h-screen py-20 bg-gray-800/30">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2
+                    class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Our Work
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    Success stories from brands we've helped grow
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <div
+                    class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600 p-1">
+                    <div
+                        class="bg-gray-900 rounded-2xl p-8 h-full group-hover:bg-gray-800 transition-colors duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                            <span class="text-green-400 text-sm font-semibold">E-COMMERCE</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 group-hover:text-blue-400 transition-colors duration-300">
+                            TechStore Redesign</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Complete e-commerce platform redesign resulting in
+                            340% increase in conversions</p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-500">Results:</div>
+                            <div class="text-green-400 font-bold">+340% Sales</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-600 to-pink-600 p-1">
+                    <div
+                        class="bg-gray-900 rounded-2xl p-8 h-full group-hover:bg-gray-800 transition-colors duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 bg-purple-500 rounded-full mr-2 animate-pulse"
+                                style="animation-delay: 0.5s;"></div>
+                            <span class="text-purple-400 text-sm font-semibold">BRANDING</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 group-hover:text-purple-400 transition-colors duration-300">
+                            FitLife Brand Identity</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Complete brand overhaul for fitness startup, from
+                            logo to digital presence</p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-500">Results:</div>
+                            <div class="text-green-400 font-bold">+200% Engagement</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-600 to-blue-600 p-1">
+                    <div
+                        class="bg-gray-900 rounded-2xl p-8 h-full group-hover:bg-gray-800 transition-colors duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 bg-blue-500 rounded-full mr-2 animate-pulse"
+                                style="animation-delay: 1s;"></div>
+                            <span class="text-blue-400 text-sm font-semibold">SEO CAMPAIGN</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 group-hover:text-green-400 transition-colors duration-300">
+                            LocalBiz SEO Growth</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Local SEO optimization campaign for restaurant
+                            chain across 15 locations</p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-500">Results:</div>
+                            <div class="text-green-400 font-bold">1st Page Rankings</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-yellow-600 to-red-600 p-1">
+                    <div
+                        class="bg-gray-900 rounded-2xl p-8 h-full group-hover:bg-gray-800 transition-colors duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2 animate-pulse"
+                                style="animation-delay: 1.5s;"></div>
+                            <span class="text-yellow-400 text-sm font-semibold">SOCIAL MEDIA</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 group-hover:text-yellow-400 transition-colors duration-300">
+                            Fashion Brand Campaign</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Viral social media campaign for sustainable
+                            fashion brand launch</p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-500">Results:</div>
+                            <div class="text-green-400 font-bold">5M+ Impressions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-pink-600 to-purple-600 p-1">
+                    <div
+                        class="bg-gray-900 rounded-2xl p-8 h-full group-hover:bg-gray-800 transition-colors duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 bg-pink-500 rounded-full mr-2 animate-pulse"
+                                style="animation-delay: 2s;"></div>
+                            <span class="text-pink-400 text-sm font-semibold">WEB APP</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 group-hover:text-pink-400 transition-colors duration-300">SaaS
+                            Platform Design</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Complete UX/UI redesign for B2B software platform
+                            serving 10k+ users</p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-500">Results:</div>
+                            <div class="text-green-400 font-bold">-60% Support Tickets</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-600 to-green-600 p-1">
+                    <div
+                        class="bg-gray-900 rounded-2xl p-8 h-full group-hover:bg-gray-800 transition-colors duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 bg-cyan-500 rounded-full mr-2 animate-pulse"
+                                style="animation-delay: 2.5s;"></div>
+                            <span class="text-cyan-400 text-sm font-semibold">CONTENT STRATEGY</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 group-hover:text-cyan-400 transition-colors duration-300">
+                            FinTech Content Hub</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Content marketing strategy and execution for
+                            financial technology startup</p>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-500">Results:</div>
+                            <div class="text-green-400 font-bold">+450% Traffic</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Team Section -->
+    <section id="team" class="min-h-screen py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2
+                    class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                    Meet Our Team
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    Creative minds and strategic thinkers working together to deliver exceptional results
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <div class="group text-center">
+                    <div class="relative mb-6 mx-auto w-48 h-48">
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl rotate-6 group-hover:rotate-12 transition-transform duration-300">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gray-700 rounded-2xl -rotate-6 group-hover:-rotate-12 transition-transform duration-300 flex items-center justify-center">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">AS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">Alex
+                        Smith</h3>
+                    <p class="text-gray-400 mb-2">Founder & CEO</p>
+                    <p class="text-gray-500 text-sm">Visionary leader with 10+ years in digital marketing and product
+                        strategy.</p>
+                </div>
+                <div class="group text-center">
+                    <div class="relative mb-6 mx-auto w-48 h-48">
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl rotate-6 group-hover:rotate-12 transition-transform duration-300">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gray-700 rounded-2xl -rotate-6 group-hover:-rotate-12 transition-transform duration-300 flex items-center justify-center">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">JM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors duration-300">Jamie
+                        Miller</h3>
+                    <p class="text-gray-400 mb-2">Lead Designer</p>
+                    <p class="text-gray-500 text-sm">Award-winning designer specializing in branding and UI/UX.</p>
+                </div>
+                <div class="group text-center">
+                    <div class="relative mb-6 mx-auto w-48 h-48">
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl rotate-6 group-hover:rotate-12 transition-transform duration-300">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gray-700 rounded-2xl -rotate-6 group-hover:-rotate-12 transition-transform duration-300 flex items-center justify-center">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-green-400 to-blue-400 rounded-full flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">RK</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-green-400 transition-colors duration-300">Riley
+                        Kim</h3>
+                    <p class="text-gray-400 mb-2">Head of Development</p>
+                    <p class="text-gray-500 text-sm">Full-stack developer passionate about scalable web solutions.</p>
+                </div>
+                <div class="group text-center">
+                    <div class="relative mb-6 mx-auto w-48 h-48">
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl rotate-6 group-hover:rotate-12 transition-transform duration-300">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gray-700 rounded-2xl -rotate-6 group-hover:-rotate-12 transition-transform duration-300 flex items-center justify-center">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">LS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-yellow-400 transition-colors duration-300">Lena
+                        Singh</h3>
+                    <p class="text-gray-400 mb-2">Content Strategist</p>
+                    <p class="text-gray-500 text-sm">Storyteller and content expert with a knack for viral campaigns.
+                    </p>
+                </div>
+            </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="min-h-screen py-20 bg-gray-800/30">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2
+                    class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Get In Touch
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    Ready to grow your brand? Let's start your project today.
+                </p>
+            </div>
+            <div class="max-w-2xl mx-auto bg-gray-900/80 rounded-2xl p-8 shadow-lg border border-white/10">
+                <form class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-300 mb-2">Name</label>
+                        <input type="text" id="name" name="name" required
+                            class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-white/10 focus:border-blue-500 focus:outline-none text-white" />
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-300 mb-2">Email</label>
+                        <input type="email" id="email" name="email" required
+                            class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-white/10 focus:border-blue-500 focus:outline-none text-white" />
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-300 mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" required
+                            class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-white/10 focus:border-blue-500 focus:outline-none text-white"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold hover:from-blue-600 hover:to-purple-600 transition-all duration-300">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-gray-900/90 border-t border-white/10 mt-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-gray-400 text-sm">&copy; 2024 PixelCraft Digital. All rights reserved.</div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-blue-400 transition-colors duration-300" aria-label="Twitter">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M22.46 6c-.77.35-1.6.58-2.47.69a4.3 4.3 0 0 0 1.88-2.37 8.59 8.59 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.13 12.13 0 0 1 3.11 4.9a4.28 4.28 0 0 0 1.32 5.71c-.7-.02-1.36-.21-1.94-.53v.05a4.28 4.28 0 0 0 3.43 4.19c-.33.09-.68.14-1.04.14-.25 0-.5-.02-.74-.07a4.28 4.28 0 0 0 4 2.98A8.6 8.6 0 0 1 2 19.54a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.37-.01-.56A8.72 8.72 0 0 0 24 4.59a8.5 8.5 0 0 1-2.54.7z" />
+                    </svg>
+                </a>
+                <a href="#" class="hover:text-blue-400 transition-colors duration-300" aria-label="LinkedIn">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.28c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 10.28h-3v-4.5c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.58h-3v-9h2.88v1.23h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v4.72z" />
+                    </svg>
+                </a>
+                <a href="#" class="hover:text-blue-400 transition-colors duration-300" aria-label="Instagram">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.056 1.97.24 2.43.41a4.92 4.92 0 0 1 1.77 1.02 4.92 4.92 0 0 1 1.02 1.77c.17.46.354 1.26.41 2.43.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.97-.41 2.43a4.92 4.92 0 0 1-1.02 1.77 4.92 4.92 0 0 1-1.77 1.02c-.46.17-1.26.354-2.43.41-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.43-.41a4.92 4.92 0 0 1-1.77-1.02 4.92 4.92 0 0 1-1.02-1.77c-.17-.46-.354-1.26-.41-2.43C2.212 15.784 2.2 15.4 2.2 12s.012-3.584.07-4.85c.056-1.17.24-1.97.41-2.43a4.92 4.92 0 0 1 1.02-1.77 4.92 4.92 0 0 1 1.77-1.02c.46-.17 1.26-.354 2.43-.41C8.416 2.212 8.8 2.2 12 2.2zm0-2.2C8.736 0 8.332.012 7.052.07 5.77.128 4.86.312 4.09.52a7.07 7.07 0 0 0-2.56 1.04A7.07 7.07 0 0 0 .52 4.09c-.208.77-.392 1.68-.45 2.96C.012 8.332 0 8.736 0 12c0 3.264.012 3.668.07 4.948.058 1.28.242 2.19.45 2.96a7.07 7.07 0 0 0 1.04 2.56 7.07 7.07 0 0 0 2.56 1.04c.77.208 1.68.392 2.96.45C8.332 23.988 8.736 24 12 24s3.668-.012 4.948-.07c1.28-.058 2.19-.242 2.96-.45a7.07 7.07 0 0 0 2.56-1.04 7.07 7.07 0 0 0 1.04-2.56c.208-.77.392-1.68.45-2.96.058-1.28.07-1.684.07-4.948s-.012-3.668-.07-4.948c-.058-1.28-.242-2.19-.45-2.96a7.07 7.07 0 0 0-1.04-2.56A7.07 7.07 0 0 0 19.91.52c-.77-.208-1.68-.392-2.96-.45C15.668.012 15.264 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm7.844-10.406a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile menu script -->
     <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        let w, h, particles;
-        const particleCount = 25;
-        const particleColor = '#FF6B6B';
-        let mx = 0;
-        let my = 0;
-        let toggle = 0;
-
-        function init() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
-            particles = Array(particleCount).fill().map(() => ({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                vx: Math.random() * 2 - 1,
-                vy: Math.random() * 2 - 1,
-                size: Math.random() * 2 + 2
-            }));
-        }
-
-        function animate() {
-            ctx.fillStyle = 'rgba(255,255,255,0.1)';
-            ctx.fillRect(0, 0, w, h);
-
-            particles.forEach((p, i) => {
-                // Calculate new position first
-                let newX = p.x + p.vx + (mx - w / 2) * 0.01;
-                let newY = p.y + p.vy + (my - h / 2) * 0.01;
-
-                // Check boundaries before updating position
-                if (newX < 0 || newX > w) {
-                    p.vx *= -1;
-                    newX = p.x; // Keep old position
-                }
-                if (newY < 0 || newY > h) {
-                    p.vy *= -1;
-                    newY = p.y; // Keep old position
-                }
-
-                // Update position
-                p.x = newX;
-                p.y = newY;
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = particleColor;
-                ctx.fill();
-
-                particles.slice(i + 1).forEach(p2 => {
-                    let dx = p2.x - p.x;
-                    let dy = p2.y - p.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(255,107,107,${0.2 * (1 - dist / 150)})`;
-                        ctx.stroke();
-                    }
-                });
-            });
-
-            requestAnimationFrame(animate);
-        }
-        init();
-        animate();
-
-        window.addEventListener('resize', init);
-        window.addEventListener('mousemove', e => {
-            mx = e.clientX;
-            my = e.clientY;
-        });
-
-        // Typewriter
-        const text = "Hi, I'm Obidur Rahman";
-        let i = 0;
-        const typewriter = document.getElementById('typewriter');
-
-        function type() {
-            if (i < text.length) {
-                typewriter.textContent += text.charAt(i++);
-                setTimeout(type, 100);
-            }
-        }
-        type();
-
-        // Mobile menu
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
-
+        let menuOpen = false;
         menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-
-        document.addEventListener('click', e => {
-            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.remove('active');
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.classList.remove('-translate-y-full', 'opacity-0');
+                mobileMenu.classList.add('translate-y-0', 'opacity-100');
+            } else {
+                mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+                mobileMenu.classList.remove('translate-y-0', 'opacity-100');
             }
         });
-
-
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+                mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+            });
+        });
     </script>
-
 </body>
 
-</html>
+</html></a>
